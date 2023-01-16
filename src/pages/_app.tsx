@@ -1,14 +1,7 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { createTheme, ThemeProvider } from "@mui/material";
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#A555EC",
-    },
-  },
-});
+import { theme } from "../styles/theme";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
