@@ -11,16 +11,21 @@ interface Props {
 export const Layout: React.FC<Props> = ({ ...props }) => {
   return (
     <>
-      <Grid container>
+      <Grid container xs={1}>
+        <Grid item xs></Grid>
         {
           //Insert navigation bar here.
         }
       </Grid>
-      <Grid container>
-        {
-          //Inseart utility bar here.
-        }
-        {props.children}
+      <Grid container xs={12}>
+        <Grid item xs>
+          {
+            //Inseart utility bar here.
+          }
+        </Grid>
+        <Grid item xs>
+          {props.children}
+        </Grid>
       </Grid>
     </>
   );
