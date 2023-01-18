@@ -1,5 +1,8 @@
-import { Box, Grid } from "@mui/material";
+import { Box, Button, Grid, IconButton } from "@mui/material";
 import * as colours from "@mui/material/colors";
+import { HiOutlineFolder } from "react-icons/hi";
+import { CiGrid42 } from "react-icons/ci";
+import { BsGear, BsMarkdown } from "react-icons/bs";
 import React from "react";
 
 export const SideNavbar: React.FC = () => {
@@ -20,9 +23,7 @@ export const SideNavbar: React.FC = () => {
            * - It takes you to the home page on click
            * - it is slightly larger than the other nav elements
            */}
-          <Box
-            sx={{ width: 50, height: 50, backgroundColor: colours.green[300] }}
-          />
+          <BsMarkdown fontSize={"45"} />
         </Grid>
         <Grid
           item
@@ -39,19 +40,19 @@ export const SideNavbar: React.FC = () => {
            * - When they are not active buttons should have a white background and a black icon outline.
            */}
           <Grid item>
-            <Box
-              sx={{ width: 35, height: 35, backgroundColor: colours.red[500] }}
-            />
+            <IconButton>
+              <CiGrid42 height={35} />
+            </IconButton>
           </Grid>
           <Grid item>
-            <Box
-              sx={{ width: 35, height: 35, backgroundColor: colours.red[500] }}
-            />
+            <IconButton>
+              <HiOutlineFolder height={35} />
+            </IconButton>
           </Grid>
           <Grid item>
-            <Box
-              sx={{ width: 35, height: 35, backgroundColor: colours.red[500] }}
-            />
+            <IconButton>
+              <BsGear height={35} />
+            </IconButton>
           </Grid>
         </Grid>
       </Grid>
