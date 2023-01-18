@@ -24,5 +24,19 @@ export const theme = createTheme({
         },
       },
     },
+    MuiIconButton: {
+      defaultProps: {
+        centerRipple: false,
+      },
+      styleOverrides: {
+        root: {
+          borderRadius: 10,
+          ":hover": {
+            color: purple[300],
+            backgroundColor: purple[50],
+          },
+        },
+      },
+    },
   },
 });
