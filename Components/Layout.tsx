@@ -1,4 +1,5 @@
-import { Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
+import * as colors from "@mui/material/colors";
 import React from "react";
 
 interface Props {
@@ -11,20 +12,56 @@ interface Props {
 export const Layout: React.FC<Props> = ({ ...props }) => {
   return (
     <>
-      <Grid container xs={1}>
-        <Grid item xs></Grid>
-        {
-          //Insert navigation bar here.
-        }
-      </Grid>
-      <Grid container xs={12}>
-        <Grid item xs>
+      <Grid container>
+        <Grid item xs={0} sm={0.75} lg={0.5} xl={0.4}>
           {
-            //Inseart utility bar here.
+            //Insert side navigation bar here.
           }
+          <Box
+            sx={{
+              width: "100%",
+              height: "100vh",
+              backgroundColor: colors.green[400],
+            }}
+          />
         </Grid>
-        <Grid item xs>
-          {props.children}
+        <Grid
+          item
+          direction={"column"}
+          xs={12}
+          sm={11.25}
+          lg={11.5}
+          xl={11.6}
+          container
+        >
+          <Grid item>
+            {
+              //Inseart utility bar here.
+            }
+            <Box
+              sx={{
+                width: "100%",
+                height: 50,
+                backgroundColor: colors.blue[500],
+              }}
+            />
+          </Grid>
+          <Grid item xs>
+            {/** page content goes here */}
+            {props.children}
+          </Grid>
+          <Grid item xs={1} sm={0.001}>
+            {
+              // insert bottom navbar here
+            }
+            <Box
+              sx={{
+                width: "100%",
+                height: "100%",
+                backgroundColor: colors.red[500],
+              }}
+            />
+          </Grid>
         </Grid>
       </Grid>
     </>
