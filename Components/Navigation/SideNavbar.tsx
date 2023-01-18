@@ -10,9 +10,10 @@ export const SideNavbar: React.FC = () => {
         minHeight: "100vh",
         display: "grid",
         justifyContent: "center",
+        paddingTop: 2,
       }}
     >
-      <Grid container spacing={3} direction={"column"}>
+      <Grid container spacing={7} direction={"column"}>
         <Grid item>
           {/**
            * - Logo goes here.
@@ -26,7 +27,7 @@ export const SideNavbar: React.FC = () => {
         <Grid
           item
           container
-          spacing={1}
+          spacing={3}
           direction={"column"}
           display="grid"
           justifyContent={"center"}
@@ -37,16 +38,6 @@ export const SideNavbar: React.FC = () => {
            * - When active, the button have a light purple background and button icons should have a darker purple outline
            * - When they are not active buttons should have a white background and a black icon outline.
            */}
-          <Grid item>
-            <Box
-              sx={{ width: 35, height: 35, backgroundColor: colours.red[500] }}
-            />
-          </Grid>
-          <Grid item>
-            <Box
-              sx={{ width: 35, height: 35, backgroundColor: colours.red[500] }}
-            />
-          </Grid>
           <Grid item>
             <Box
               sx={{ width: 35, height: 35, backgroundColor: colours.red[500] }}
