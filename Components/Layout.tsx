@@ -1,5 +1,6 @@
 import { Grid } from "@mui/material";
 import React from "react";
+import { SideNavbar } from "./Navigation";
 
 interface Props {
   children?: React.ReactNode;
@@ -13,9 +14,7 @@ export const Layout: React.FC<Props> = ({ ...props }) => {
     <>
       <Grid container>
         <Grid item xs={0} sm={0.75} lg={0.5} xl={0.4}>
-          {
-            //Insert side navigation bar here.
-          }
+          <SideNavbar />
         </Grid>
         <Grid
           item
