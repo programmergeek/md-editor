@@ -54,11 +54,13 @@ export const UtilityBar: React.FC = () => {
           </Grid>
           <Grid item display={"flex"} justifyContent={"end"} xs={8}>
             <IconButton
+              size="small"
               sx={{
                 borderRadius: 999,
-                marginTop: 1.7,
+                marginTop: 2.5,
                 marginRight: 2,
-                width: 60,
+                width: 45,
+                height: 45,
                 ":hover": {
                   backgroundColor: colours.purple[50],
                   color: colours.purple[500],
