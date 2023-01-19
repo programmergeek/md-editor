@@ -1,6 +1,7 @@
 import { Grid } from "@mui/material";
 import React from "react";
 import { SideNavbar } from "./Navigation";
+import { UtilityBar } from "./UtilityBar/UtilityBar";
 
 interface Props {
   children?: React.ReactNode;
@@ -29,6 +30,7 @@ export const Layout: React.FC<Props> = ({ ...props }) => {
             {
               //Inseart utility bar here.
             }
+            <UtilityBar />
           </Grid>
           <Grid item xs>
             {/** page content goes here */}
