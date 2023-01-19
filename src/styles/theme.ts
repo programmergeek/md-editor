@@ -32,8 +32,8 @@ export const theme = createTheme({
         root: {
           borderRadius: 10,
           ":hover": {
-            color: purple[300],
-            backgroundColor: purple[50],
+            color: purple[500],
+            backgroundColor: "#fff",
           },
         },
       },
