@@ -58,6 +58,7 @@ export const UtilityBar: React.FC = () => {
                 borderRadius: 999,
                 marginTop: 1.7,
                 marginRight: 2,
+                width: 60,
                 ":hover": {
                   backgroundColor: colours.purple[50],
                   color: colours.purple[500],
