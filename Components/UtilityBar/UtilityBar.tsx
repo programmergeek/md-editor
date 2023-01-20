@@ -53,7 +53,7 @@ export const UtilityBar: React.FC = () => {
     >
       <Grid container>
         <Grid item container>
-          <Grid item xs={4}>
+          <Grid item xs={5} md={3} xl={2}>
             <Box
               sx={{
                 display: "flex",
@@ -61,17 +61,28 @@ export const UtilityBar: React.FC = () => {
                 gap: 2,
                 marginTop: 1,
                 marginLeft: 4,
+                width: "100%",
               }}
             >
-              <FiSearch style={{ marginBottom: 5 }} />
+              <Box sx={{ width: 20 }}>
+                <FiSearch />
+              </Box>
               <TextField
                 id="standard-basic"
                 label="search"
                 variant="standard"
+                fullWidth
               />
             </Box>
           </Grid>
-          <Grid item display={"flex"} justifyContent={"end"} xs={8}>
+          <Grid
+            item
+            display={"flex"}
+            justifyContent={"end"}
+            xs={7}
+            md={9}
+            xl={10}
+          >
             <IconButton
               size="small"
               sx={{
