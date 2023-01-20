@@ -14,6 +14,17 @@ import { IoAdd, IoLogOutOutline } from "react-icons/io5";
 import { BsGear } from "react-icons/bs";
 import React, { useState } from "react";
 
+// TODO:
+// - Search:
+//  - Search field has been created but it is not connected to any backend logic to search for posts:
+//    - It should send the search term to the backend and navigate the user to search results page to display the results.
+//  - Search fields needs to wrapped in a form.
+//
+// - Utility Buttons:
+//  - The `new post` buttons need to navigate the user to the new post post page.
+//  - The `settings` button should navigate the user to the settings page
+//  - The `logout` button should delete the user session, e.i remove any user authentication data from the global state/context
+
 export const UtilityBar: React.FC = () => {
   // store the state of the anchor element
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
