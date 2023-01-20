@@ -15,15 +15,23 @@ import { BsGear } from "react-icons/bs";
 import React, { useState } from "react";
 
 export const UtilityBar: React.FC = () => {
+  // store the state of the anchor element
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
+  const open = Boolean(anchorEl); // boolean value to determine if the menu is open
+
+  // When the user avatar icon button is clicked it will be set as an anchor for the menu
+  // When the anchor is set it will allow the menu to appear directly below it
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
+    console.log(event.currentTarget);
   };
 
+  // when the user either clicks off the menu or selects one of the options, the achor element will be
+  // set to null which will hide the menu.
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   return (
     <Box
       sx={{
@@ -120,7 +128,7 @@ export const UtilityBar: React.FC = () => {
               display: "block",
               position: "absolute",
               top: 0,
-              right: 14,
+              right: 24,
               width: 10,
               height: 10,
               bgcolor: "background.paper",
