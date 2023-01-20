@@ -1,7 +1,7 @@
-import { Box, Container } from "@mui/material";
+import { Box, Container, InputBase } from "@mui/material";
 import { Layout } from "Components";
 import Head from "next/head";
-import React from "react";
+import React, { useState } from "react";
 
 //
 // - This is where posts will be display
@@ -22,16 +22,31 @@ import React from "react";
 //
 
 const Post: React.FC = () => {
+  const [title, updateTitle] = useState("");
+
+  const handleTitleChange = (event: any) => {
+    updateTitle(event.currentTarget.value);
+  };
   return (
     <Layout>
       <Head>
-        <title>Post</title>
+        <title>{title}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <Container>
+        {/** Insert Hero Image here */}
         <Box
           sx={{ backgroundColor: "#a4a4a4", width: "100%", height: "50vh" }}
         />
+        <Box>
+          {/** Insert Title here */}
+          <InputBase
+            sx={{ fontSize: 40, fontWeight: 700 }}
+            placeholder="Title"
+            onChange={handleTitleChange}
+          />
+        </Box>
+        <Box>{/** Insert Body here */}</Box>
       </Container>
     </Layout>
   );
