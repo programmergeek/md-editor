@@ -16,7 +16,10 @@ export const SideNavbar: React.FC = () => {
       sx={{
         borderRight: `1px solid ${colours.grey[400]}`,
         minHeight: "100vh",
-        display: "grid",
+        display: {
+          xs: "none",
+          sm: "grid",
+        },
         justifyContent: "center",
         paddingTop: 2,
       }}
