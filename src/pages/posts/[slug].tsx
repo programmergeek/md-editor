@@ -1,4 +1,4 @@
-import { Box, Container, InputBase } from "@mui/material";
+import { Box, Container, Grid, InputBase } from "@mui/material";
 import { Layout } from "Components";
 import Head from "next/head";
 import React, { useState } from "react";
@@ -34,19 +34,24 @@ const Post: React.FC = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <Container>
-        {/** Insert Hero Image here */}
-        <Box
-          sx={{ backgroundColor: "#a4a4a4", width: "100%", height: "50vh" }}
-        />
-        <Box>
-          {/** Insert Title here */}
-          <InputBase
-            sx={{ fontSize: 40, fontWeight: 700 }}
-            placeholder="Title"
-            onChange={handleTitleChange}
-          />
-        </Box>
-        <Box>{/** Insert Body here */}</Box>
+        <Grid container justifyContent={"center"}>
+          <Grid item container sm={11} md={7.5} lg={8}>
+            <Box>
+              {/** Insert Title here */}
+              <InputBase
+                sx={{ fontSize: 40, fontWeight: 700 }}
+                placeholder="Title"
+                onChange={handleTitleChange}
+              />
+            </Box>
+            <Box
+              sx={{ backgroundColor: "#a4a4a4", width: "100%", height: "50vh" }}
+            >
+              {/** Insert Hero Image here */}
+            </Box>
+            <Box>{/** Insert Body here */}</Box>
+          </Grid>
+        </Grid>
       </Container>
     </Layout>
   );
