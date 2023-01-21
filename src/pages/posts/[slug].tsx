@@ -35,21 +35,37 @@ const Post: React.FC = () => {
       </Head>
       <Container>
         <Grid container justifyContent={"center"}>
-          <Grid item container sm={11} md={7.5} lg={8}>
-            <Box>
+          <Grid item container direction={"column"} sm={11} md={7.5} lg={8}>
+            <Grid item>
               {/** Insert Title here */}
               <InputBase
                 sx={{ fontSize: 40, fontWeight: 700 }}
                 placeholder="Title"
+                multiline
+                fullWidth
                 onChange={handleTitleChange}
               />
-            </Box>
-            <Box
-              sx={{ backgroundColor: "#a4a4a4", width: "100%", height: "50vh" }}
-            >
-              {/** Insert Hero Image here */}
-            </Box>
-            <Box>{/** Insert Body here */}</Box>
+            </Grid>
+            <Grid item>
+              <Box
+                sx={{
+                  backgroundColor: "#a4a4a4",
+                  width: "100%",
+                  height: "50vh",
+                }}
+              >
+                {/** Insert Hero Image here */}
+              </Box>
+            </Grid>
+            <Grid item>
+              {/** Insert Body here */}
+              <InputBase
+                placeholder="Your content goes here."
+                multiline
+                fullWidth
+                sx={{ marginTop: 2 }}
+              />
+            </Grid>
           </Grid>
         </Grid>
       </Container>
