@@ -1,7 +1,15 @@
-import { Box, Container, Grid, InputBase } from "@mui/material";
+import {
+  Box,
+  Container,
+  FormControlLabel,
+  Grid,
+  InputBase,
+  Switch,
+} from "@mui/material";
 import { Layout } from "Components";
 import Head from "next/head";
 import React, { useState } from "react";
+import ReactMarkdown from "react-markdown";
 
 //
 // - This is where posts will be display
@@ -23,9 +31,14 @@ import React, { useState } from "react";
 
 const Post: React.FC = () => {
   const [title, updateTitle] = useState("");
+  const [content, updateContent] = useState("");
+  const [previewMode, togglePreviewMode] = useState(false);
 
   const handleTitleChange = (event: any) => {
     updateTitle(event.currentTarget.value);
+  };
+  const handleContentChange = (event: any) => {
+    updateContent(event.currentTarget.value);
   };
   return (
     <Layout>
@@ -59,12 +72,28 @@ const Post: React.FC = () => {
             </Grid>
             <Grid item>
               {/** Insert Body here */}
-              <InputBase
-                placeholder="Your content goes here."
-                multiline
-                fullWidth
-                sx={{ marginTop: 2 }}
+              <FormControlLabel
+                control={<Switch />}
+                onChange={() => togglePreviewMode(!previewMode)}
+                label="Preview"
+                sx={{
+                  color: previewMode ? "black" : "#a3a3a3",
+                }}
               />
+              {previewMode ? (
+                <Box sx={{ marginTop: 2 }}>
+                  <ReactMarkdown>{content}</ReactMarkdown>
+                </Box>
+              ) : (
+                <InputBase
+                  placeholder="Your content goes here."
+                  multiline
+                  fullWidth
+                  sx={{ marginTop: 2 }}
+                  onChange={handleContentChange}
+                  value={content}
+                />
+              )}
             </Grid>
           </Grid>
         </Grid>
