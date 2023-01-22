@@ -7,6 +7,7 @@ import {
   Switch,
 } from "@mui/material";
 import { Layout } from "Components";
+import { MarkdownComponents } from "lib/markdown/MarkdownComponents";
 import Head from "next/head";
 import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
@@ -82,7 +83,9 @@ const Post: React.FC = () => {
               />
               {previewMode ? (
                 <Box sx={{ marginTop: 2 }}>
-                  <ReactMarkdown>{content}</ReactMarkdown>
+                  <ReactMarkdown components={MarkdownComponents}>
+                    {content}
+                  </ReactMarkdown>
                 </Box>
               ) : (
                 <InputBase
