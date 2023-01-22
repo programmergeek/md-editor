@@ -11,6 +11,7 @@ import { MarkdownComponents } from "lib/markdown/MarkdownComponents";
 import Head from "next/head";
 import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 //
 // - This is where posts will be display
@@ -83,7 +84,10 @@ const Post: React.FC = () => {
               />
               {previewMode ? (
                 <Box sx={{ marginTop: 2 }}>
-                  <ReactMarkdown components={MarkdownComponents}>
+                  <ReactMarkdown
+                    remarkPlugins={[[remarkGfm]]}
+                    components={MarkdownComponents}
+                  >
                     {content}
                   </ReactMarkdown>
                 </Box>
