@@ -1,9 +1,23 @@
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dracula } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import * as colours from "@mui/material/colors";
-import { Typography } from "@mui/material";
+import {
+  Grid,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from "@mui/material";
+import { NormalComponents } from "react-markdown/lib/complex-types";
+import { SpecialComponents } from "react-markdown/lib/ast-to-react";
 
-export const MarkdownComponents = {
+export const MarkdownComponents: Partial<
+  Omit<NormalComponents, keyof SpecialComponents> & SpecialComponents
+> = {
   code({ node, inline, className, children, ...props }: any) {
     const match = /language-(\w+)/.exec(className || "");
     return !inline && match ? (
@@ -76,10 +90,32 @@ export const MarkdownComponents = {
   },
   p: ({ node, ...props }: any) => {
     return (
-      <Typography sx={{ fontSize: { xs: 12, lg: 16 } }}>
+      <Typography sx={{ fontSize: { xs: 12, lg: 16 }, wordWrap: "normal" }}>
         {" "}
         {props.children}{" "}
       </Typography>
     );
+  },
+  tr: ({ ...props }) => {
+    return <TableRow> {props.children} </TableRow>;
+  },
+  table: ({ node, ...props }) => {
+    return (
+      <TableContainer component={Paper}>
+        <Table>{props.children}</Table>
+      </TableContainer>
+    );
+  },
+  td: ({ node, ...props }) => {
+    return <TableCell> {props.children} </TableCell>;
+  },
+  thead: ({ node, ...props }) => {
+    return <TableHead>{props.children}</TableHead>;
+  },
+  th: ({ node, ...props }) => {
+    return <TableCell sx={{ fontWeight: 600 }}> {props.children} </TableCell>;
+  },
+  tbody: ({ node, ...props }) => {
+    return <TableBody> {props.children} </TableBody>;
   },
 };
