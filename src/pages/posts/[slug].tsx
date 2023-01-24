@@ -72,7 +72,7 @@ const Post: React.FC = () => {
                 {/** Insert Hero Image here */}
               </Box>
             </Grid>
-            <Grid item>
+            <Grid item sx={{ width: "100%" }}>
               {/** Insert Body here */}
               <FormControlLabel
                 control={<Switch />}
