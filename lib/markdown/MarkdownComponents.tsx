@@ -2,6 +2,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dracula } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import * as colours from "@mui/material/colors";
 import {
+  Divider,
   Link,
   List,
   ListItem,
@@ -166,5 +167,8 @@ export const MarkdownComponents: Partial<
         </ListItemText>
       </ListItem>
     );
+  },
+  hr: ({ ...props }) => {
+    return <Divider />;
   },
 };
