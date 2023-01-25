@@ -3,6 +3,9 @@ import { dracula } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import * as colours from "@mui/material/colors";
 import {
   Link,
+  List,
+  ListItem,
+  ListItemText,
   Paper,
   Table,
   TableBody,
@@ -147,6 +150,21 @@ export const MarkdownComponents: Partial<
       >
         <Typography>{props.children}</Typography>
       </Box>
+    );
+  },
+  ul: ({ ...props }) => {
+    return <List sx={{ padding: 0 }}>{props.children}</List>;
+  },
+  ol: ({ ...props }) => {
+    return <List sx={{ padding: 0 }}>{props.children}</List>;
+  },
+  li: ({ index, ordered, ...props }) => {
+    return (
+      <ListItem dense disableGutters sx={{ padding: 0 }}>
+        <ListItemText>
+          {ordered ? index + 1 + "." : ""} {props.children}
+        </ListItemText>
+      </ListItem>
     );
   },
 };
