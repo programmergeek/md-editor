@@ -6,6 +6,7 @@ import {
   Divider,
   FormControlLabel,
   FormGroup,
+  ImageList,
   Link,
   List,
   ListItem,
@@ -22,6 +23,7 @@ import {
 import { NormalComponents } from "react-markdown/lib/complex-types";
 import { SpecialComponents } from "react-markdown/lib/ast-to-react";
 import { Box } from "@mui/system";
+import Image from "next/image";
 
 export const MarkdownComponents: Partial<
   Omit<NormalComponents, keyof SpecialComponents> & SpecialComponents
@@ -176,5 +178,30 @@ export const MarkdownComponents: Partial<
   },
   input: ({ checked, ...props }) => {
     return <Checkbox checked={checked} sx={{ padding: 0, paddingRight: 1 }} />;
+  },
+  img: ({ ...props }) => {
+    return (
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Box
+          sx={{
+            maxWidth: {
+              xs: "90%",
+              sm: "75%",
+            },
+          }}
+        >
+          <img
+            src={props.src}
+            style={{ opacity: 1, width: "100%", borderRadius: 3 }}
+          />
+        </Box>
+      </Box>
+    );
   },
 };
