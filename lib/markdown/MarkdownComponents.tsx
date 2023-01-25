@@ -2,7 +2,10 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dracula } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import * as colours from "@mui/material/colors";
 import {
+  Checkbox,
   Divider,
+  FormControlLabel,
+  FormGroup,
   Link,
   List,
   ListItem,
@@ -170,5 +173,8 @@ export const MarkdownComponents: Partial<
   },
   hr: ({ ...props }) => {
     return <Divider />;
+  },
+  input: ({ checked, ...props }) => {
+    return <Checkbox checked={checked} sx={{ padding: 0, paddingRight: 1 }} />;
   },
 };
