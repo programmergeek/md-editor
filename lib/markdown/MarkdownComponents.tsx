@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import { NormalComponents } from "react-markdown/lib/complex-types";
 import { SpecialComponents } from "react-markdown/lib/ast-to-react";
+import { Box } from "@mui/system";
 
 export const MarkdownComponents: Partial<
   Omit<NormalComponents, keyof SpecialComponents> & SpecialComponents
@@ -131,6 +132,21 @@ export const MarkdownComponents: Partial<
       >
         {props.children}
       </Link>
+    );
+  },
+  blockquote: ({ ...props }) => {
+    return (
+      <Box
+        sx={{
+          borderLeft: "5px solid black",
+          paddingLeft: 2,
+          paddingTop: 1,
+          paddingBottom: 1,
+          backgroundColor: colours.grey[100],
+        }}
+      >
+        <Typography>{props.children}</Typography>
+      </Box>
     );
   },
 };
