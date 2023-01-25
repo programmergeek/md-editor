@@ -2,7 +2,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dracula } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import * as colours from "@mui/material/colors";
 import {
-  Grid,
+  Link,
   Paper,
   Table,
   TableBody,
@@ -117,5 +117,20 @@ export const MarkdownComponents: Partial<
   },
   tbody: ({ node, ...props }) => {
     return <TableBody> {props.children} </TableBody>;
+  },
+  a: ({ ...props }) => {
+    return (
+      <Link
+        href={props.href}
+        sx={{
+          ":visited": {
+            color: colours.blue[800],
+          },
+          textDecoration: "none",
+        }}
+      >
+        {props.children}
+      </Link>
+    );
   },
 };
