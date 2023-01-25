@@ -17,7 +17,7 @@ import remarkGfm from "remark-gfm";
 // - This is where posts will be display
 // - The user should be able to:
 //      - toggle between and edit mode, where they can change the content of their post, and a preview mode,
-//        where the raw markdown is rendered.
+//        where the raw markdown is rendered. ✅
 //      - Save their posts
 //      - Share their posts
 // - Page structure:
