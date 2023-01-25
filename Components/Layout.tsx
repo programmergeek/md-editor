@@ -17,7 +17,7 @@ export const Layout: React.FC<Props> = ({ ...props }) => {
         <Grid item xs={0} sm={0.75} lg={0.5} xl={0.4}>
           <SideNavbar />
         </Grid>
-        <Grid item direction={"column"} xs={12} sm={11.25} lg={11.5} xl={11.6}>
+        <Grid item xs={12} sm={11.25} lg={11.5} xl={11.6}>
           <Grid item>
             {
               //Inseart utility bar here.
