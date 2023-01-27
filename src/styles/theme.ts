@@ -17,9 +17,16 @@ export const theme = createTheme({
       },
       styleOverrides: {
         root: {
-          backgroundColor: purple[50],
+          backgroundColor: purple[500],
+          color: "#fff",
+          fontWeight: 600,
           ":hover": {
-            backgroundColor: purple[50],
+            backgroundColor: purple[400],
+            color: "#fff",
+          },
+          ":disabled": {
+            backgroundColor: purple[200],
+            color: "#fff",
           },
         },
       },
