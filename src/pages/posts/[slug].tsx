@@ -6,6 +6,7 @@ import {
   Grid,
   InputBase,
   Switch,
+  Typography,
 } from "@mui/material";
 import { Layout } from "Components";
 import { addPost } from "lib/firebase/firestore/addPost";
@@ -14,6 +15,7 @@ import Head from "next/head";
 import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { IoCameraOutline } from "react-icons/io5";
 
 //
 // - This is where posts will be display
@@ -66,12 +68,59 @@ const Post: React.FC = () => {
             <Grid item>
               <Box
                 sx={{
-                  backgroundColor: "#a4a4a4",
                   width: "100%",
                   height: "50vh",
+                  backgroundColor: `#f3e5f5`,
+                  borderRadius: 3,
+                  display: "grid",
+                  placeItems: "center",
                 }}
               >
                 {/** Insert Hero Image here */}
+                {/**
+                 * The User should be able to:
+                 *    - select an image file from local storage:
+                 *      - manual selection or
+                 *      - drag and drop
+                 *    - Or enter a link to an image somwhere on the internet
+                 * Only accept .png or .jpeg files
+                 */}
+                <Box
+                  sx={{
+                    border: "5px dashed #9c27b0",
+                    width: "93%",
+                    height: "45vh",
+                    borderRadius: 3,
+                    display: "grid",
+                    placeItems: "center",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyCenter: "center",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <Box sx={{ display: "grid", placeItems: "center" }}>
+                      <IoCameraOutline fontSize={100} color="#9c27b0" />
+                    </Box>
+                    <Typography
+                      textAlign={"center"}
+                      sx={{ paddingLeft: 2, paddingRight: 1 }}
+                    >
+                      Drag and drop an image or{" "}
+                      <Button
+                        sx={{
+                          color: "#9c27b0",
+                          backgroundColor: "transparent",
+                        }}
+                      >
+                        Enter a link
+                      </Button>{" "}
+                    </Typography>
+                  </Box>
+                </Box>
               </Box>
             </Grid>
             <Grid item sx={{ width: "100%" }}>
