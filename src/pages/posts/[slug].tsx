@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Container,
   FormControlLabel,
   Grid,
@@ -7,6 +8,7 @@ import {
   Switch,
 } from "@mui/material";
 import { Layout } from "Components";
+import { addPost } from "lib/firebase/firestore/addPost";
 import { MarkdownComponents } from "lib/markdown/MarkdownComponents";
 import Head from "next/head";
 import React, { useState } from "react";
@@ -97,10 +99,20 @@ const Post: React.FC = () => {
                   multiline
                   fullWidth
                   sx={{ marginTop: 2 }}
-                  onChange={handleContentChange}
+                  onChange={(e) => {
+                    handleContentChange(e);
+                    console.log(content);
+                  }}
                   value={content}
                 />
               )}
+              <Button
+                onClick={() =>
+                  addPost(title, { content: JSON.stringify(content) }, "")
+                }
+              >
+                Save
+              </Button>
             </Grid>
           </Grid>
         </Grid>
