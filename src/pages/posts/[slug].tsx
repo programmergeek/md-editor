@@ -106,7 +106,7 @@ const Post: React.FC = () => {
                       autoFocus
                       margin="dense"
                       id="imageLink"
-                      label="imageLink"
+                      label="Image Link"
                       type="url"
                       fullWidth
                       onChange={(e) => updateImageLink(e.currentTarget.value)}
