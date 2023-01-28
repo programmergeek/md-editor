@@ -2,10 +2,15 @@ import {
   Box,
   Button,
   Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   FormControlLabel,
   Grid,
   InputBase,
   Switch,
+  TextField,
   Typography,
 } from "@mui/material";
 import { Layout } from "Components";
@@ -23,7 +28,6 @@ import { IoCameraOutline } from "react-icons/io5";
 //      - toggle between and edit mode, where they can change the content of their post, and a preview mode,
 //        where the raw markdown is rendered. ✅
 //      - Save their posts
-//      - Share their posts
 // - Page structure:
 //      - Hero Image
 //      - Post Title
@@ -39,6 +43,9 @@ const Post: React.FC = () => {
   const [title, updateTitle] = useState("");
   const [content, updateContent] = useState("");
   const [previewMode, togglePreviewMode] = useState(false);
+  const [openDialog, updateOpenDialog] = useState(false);
+  const [imageLink, updateImageLink] = useState<string>();
+  const [link, updateLink] = useState<string>();
 
   const handleTitleChange = (event: any) => {
     updateTitle(event.currentTarget.value);
@@ -46,6 +53,15 @@ const Post: React.FC = () => {
   const handleContentChange = (event: any) => {
     updateContent(event.currentTarget.value);
   };
+
+  const handleOpenDialog = () => {
+    updateOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    updateOpenDialog(false);
+  };
+
   return (
     <Layout>
       <Head>
@@ -69,8 +85,7 @@ const Post: React.FC = () => {
               <Box
                 sx={{
                   width: "100%",
-                  height: "50vh",
-                  backgroundColor: `#f3e5f5`,
+                  backgroundColor: imageLink ? "#fff" : `#f3e5f5`,
                   borderRadius: 3,
                   display: "grid",
                   placeItems: "center",
@@ -78,61 +93,112 @@ const Post: React.FC = () => {
               >
                 {/** Insert Hero Image here */}
                 {/**
-                 * The User should be able to:
-                 *    - select an image file from local storage:
-                 *      - manual selection or
-                 *      - drag and drop
-                 *    - Or enter a link to an image somwhere on the internet
-                 * Only accept .png or .jpeg files
+                 * The User should be able to enter a link to an image somwhere on the internet
                  */}
-                <Box
-                  sx={{
-                    border: "5px dashed #9c27b0",
-                    width: "93%",
-                    height: "45vh",
-                    borderRadius: 3,
-                    display: "grid",
-                    placeItems: "center",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyCenter: "center",
-                      flexDirection: "column",
+                <Dialog open={openDialog} onClose={handleCloseDialog} fullWidth>
+                  <DialogTitle>Enter Image Link</DialogTitle>
+                  <DialogContent>
+                    <TextField
+                      autoFocus
+                      margin="dense"
+                      id="imageLink"
+                      label="imageLink"
+                      type="url"
+                      fullWidth
+                      onChange={(e) => updateImageLink(e.currentTarget.value)}
+                      value={imageLink}
+                      variant="standard"
+                    />
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={handleCloseDialog}>Cancel</Button>
+                    <Button
+                      onClick={() => {
+                        handleCloseDialog();
+                        updateLink(imageLink);
+                      }}
+                    >
+                      Done
+                    </Button>
+                  </DialogActions>
+                </Dialog>
+                {!link ? (
+                  <div
+                    style={{
+                      border: "5px dashed #9c27b0",
+                      width: "93%",
+                      height: "45vh",
+                      borderRadius: 12,
+                      display: "grid",
+                      placeItems: "center",
                     }}
                   >
-                    <Box sx={{ display: "grid", placeItems: "center" }}>
-                      <IoCameraOutline fontSize={100} color="#9c27b0" />
-                    </Box>
-                    <Typography
-                      textAlign={"center"}
-                      sx={{ paddingLeft: 2, paddingRight: 1 }}
+                    <Box
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        flexDirection: "column",
+                      }}
                     >
-                      Drag and drop an image or{" "}
-                      <Button
-                        sx={{
-                          color: "#9c27b0",
-                          backgroundColor: "transparent",
-                        }}
+                      <Box sx={{ display: "grid", placeItems: "center" }}>
+                        <IoCameraOutline fontSize={100} color="#9c27b0" />
+                      </Box>
+                      <Typography
+                        textAlign={"center"}
+                        sx={{ paddingLeft: 2, paddingRight: 1 }}
                       >
-                        Enter a link
-                      </Button>{" "}
-                    </Typography>
+                        <Button
+                          onClick={handleOpenDialog}
+                          sx={{
+                            color: "#9c27b0",
+                            backgroundColor: "transparent",
+                          }}
+                        >
+                          Enter a link
+                        </Button>
+                      </Typography>
+                    </Box>
+                  </div>
+                ) : (
+                  <Box
+                    sx={{
+                      overflow: "hidden",
+                      maxHeight: "50vh",
+                      borderRadius: 3,
+                      display: "grid",
+                      placeItems: "center",
+                    }}
+                  >
+                    <img src={imageLink} style={{ width: "100%" }} />
                   </Box>
-                </Box>
+                )}
               </Box>
             </Grid>
             <Grid item sx={{ width: "100%" }}>
               {/** Insert Body here */}
-              <FormControlLabel
-                control={<Switch />}
-                onChange={() => togglePreviewMode(!previewMode)}
-                label="Preview"
-                sx={{
-                  color: previewMode ? "black" : "#a3a3a3",
-                }}
-              />
+              <Grid item>
+                <Grid item>
+                  <FormControlLabel
+                    control={<Switch />}
+                    onChange={() => togglePreviewMode(!previewMode)}
+                    label="Preview"
+                    sx={{
+                      color: previewMode ? "black" : "#a3a3a3",
+                    }}
+                  />
+                </Grid>
+                <Grid item>
+                  <Button
+                    onClick={handleOpenDialog}
+                    sx={{
+                      color: "#9c27b0",
+                      backgroundColor: "transparent",
+                    }}
+                  >
+                    Change Image
+                  </Button>
+                </Grid>
+              </Grid>
               {previewMode ? (
                 <Box sx={{ marginTop: 2 }}>
                   <ReactMarkdown
