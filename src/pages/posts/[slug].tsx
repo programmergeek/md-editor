@@ -19,7 +19,7 @@ import { Layout } from "Components";
 import { addPost } from "lib/firebase/firestore/addPost";
 import { MarkdownComponents } from "lib/markdown/MarkdownComponents";
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { IoCameraOutline } from "react-icons/io5";
@@ -31,6 +31,7 @@ import { AiOutlineSave } from "react-icons/ai";
 //      - toggle between and edit mode, where they can change the content of their post, and a preview mode,
 //        where the raw markdown is rendered. ✅
 //      - Save their posts ✅
+//      - read the saved posts
 // - Page structure:
 //      - Hero Image ✅
 //      - Post Title ✅
@@ -48,6 +49,19 @@ const Post: React.FC = () => {
   const [openDialog, updateOpenDialog] = useState(false);
   const [imageLink, updateImageLink] = useState<string>();
   const [link, updateLink] = useState<string>();
+
+  // memorise output to avoid making unneccessary requests when you are switching between preview and edit mode
+  const renderedMarkdown = useMemo(
+    () => (
+      <ReactMarkdown
+        remarkPlugins={[[remarkGfm]]}
+        components={MarkdownComponents}
+      >
+        {content}
+      </ReactMarkdown>
+    ),
+    [content]
+  );
 
   const handleTitleChange = (event: any) => {
     updateTitle(event.currentTarget.value);
@@ -226,14 +240,7 @@ const Post: React.FC = () => {
                 </Grid>
               </Grid>
               {previewMode ? (
-                <Box sx={{ marginTop: 2 }}>
-                  <ReactMarkdown
-                    remarkPlugins={[[remarkGfm]]}
-                    components={MarkdownComponents}
-                  >
-                    {content}
-                  </ReactMarkdown>
-                </Box>
+                <Box sx={{ marginTop: 2 }}>{renderedMarkdown}</Box>
               ) : (
                 <InputBase
                   placeholder="Your content goes here."
