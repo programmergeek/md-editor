@@ -8,9 +8,11 @@ import {
   DialogTitle,
   FormControlLabel,
   Grid,
+  IconButton,
   InputBase,
   Switch,
   TextField,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import { Layout } from "Components";
@@ -21,22 +23,22 @@ import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { IoCameraOutline } from "react-icons/io5";
+import { AiOutlineSave } from "react-icons/ai";
 
 //
 // - This is where posts will be display
 // - The user should be able to:
 //      - toggle between and edit mode, where they can change the content of their post, and a preview mode,
 //        where the raw markdown is rendered. ✅
-//      - Save their posts
+//      - Save their posts ✅
 // - Page structure:
-//      - Hero Image
-//      - Post Title
-//      - Content (Body)
-//      - Footer
+//      - Hero Image ✅
+//      - Post Title ✅
+//      - Content (Body) ✅
 // - Edit Mode:
-//      - Content will only be shown as raw markdown
+//      - Content will only be shown as raw markdown ✅
 // - Preview Mode:
-//      - Content will be rendered using react components
+//      - Content will be rendered using react components ✅
 //
 
 const Post: React.FC = () => {
@@ -176,8 +178,17 @@ const Post: React.FC = () => {
             </Grid>
             <Grid item sx={{ width: "100%" }}>
               {/** Insert Body here */}
-              <Grid item>
-                <Grid item>
+              <Grid
+                item
+                container
+                direction="row"
+                sx={{
+                  height: 60,
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <Grid item xs={7}>
                   <FormControlLabel
                     control={<Switch />}
                     onChange={() => togglePreviewMode(!previewMode)}
@@ -187,16 +198,29 @@ const Post: React.FC = () => {
                     }}
                   />
                 </Grid>
-                <Grid item>
-                  <Button
-                    onClick={handleOpenDialog}
-                    sx={{
-                      color: "#9c27b0",
-                      backgroundColor: "transparent",
-                    }}
-                  >
-                    Change Image
-                  </Button>
+                <Grid
+                  item
+                  xs={5}
+                  sx={{
+                    display: "flex",
+                    justifyContent: "end",
+                    gap: 2,
+                  }}
+                >
+                  <Tooltip title="Change Image">
+                    <IconButton onClick={handleOpenDialog}>
+                      <IoCameraOutline />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Save Post">
+                    <IconButton
+                      onClick={() =>
+                        addPost(title, { content: JSON.stringify(content) }, "")
+                      }
+                    >
+                      <AiOutlineSave />
+                    </IconButton>
+                  </Tooltip>
                 </Grid>
               </Grid>
               {previewMode ? (
@@ -223,7 +247,11 @@ const Post: React.FC = () => {
               )}
               <Button
                 onClick={() =>
-                  addPost(title, { content: JSON.stringify(content) }, "")
+                  addPost(
+                    title,
+                    { content: JSON.stringify(content) },
+                    link ? link : ""
+                  )
                 }
               >
                 Save
