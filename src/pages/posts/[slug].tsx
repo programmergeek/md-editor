@@ -87,7 +87,7 @@ const Post: React.FC = () => {
               <Box
                 sx={{
                   width: "100%",
-                  backgroundColor: imageLink ? "#fff" : `#f3e5f5`,
+                  backgroundColor: link ? "#fff" : `#f3e5f5`,
                   borderRadius: 3,
                   display: "grid",
                   placeItems: "center",
@@ -239,7 +239,8 @@ const Post: React.FC = () => {
                   placeholder="Your content goes here."
                   multiline
                   fullWidth
-                  sx={{ marginTop: 2 }}
+                  sx={{ marginBottom: 5 }}
+                  minRows={5}
                   onChange={(e) => {
                     handleContentChange(e);
                     console.log(content);
