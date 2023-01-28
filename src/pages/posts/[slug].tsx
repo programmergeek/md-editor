@@ -91,6 +91,8 @@ const Post: React.FC = () => {
                   borderRadius: 3,
                   display: "grid",
                   placeItems: "center",
+                  paddingTop: 3,
+                  paddingBottom: 3,
                 }}
               >
                 {/** Insert Hero Image here */}
