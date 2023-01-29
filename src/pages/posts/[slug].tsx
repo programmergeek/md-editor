@@ -181,7 +181,6 @@ const Post: React.FC = () => {
                   <Box
                     sx={{
                       overflow: "hidden",
-                      maxHeight: "50vh",
                       borderRadius: 3,
                       display: "grid",
                       placeItems: "center",
