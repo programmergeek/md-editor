@@ -27,6 +27,7 @@ export const addPost = async (
       post_id: uuidv4(),
       hero_image: hero_image,
       author: doc(db, `Users/${author}`),
+      slug: title.replace(" ", "-").toLowerCase(),
     });
   } catch (e) {
     console.log("There was an issue: ", e);
