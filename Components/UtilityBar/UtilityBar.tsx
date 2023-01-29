@@ -60,7 +60,10 @@ export const UtilityBar: React.FC = () => {
                 alignItems: "flex-end",
                 gap: 2,
                 marginTop: 1,
-                marginLeft: 4,
+                marginLeft: {
+                  xs: 1,
+                  md: 4,
+                },
                 width: "100%",
               }}
             >
@@ -102,7 +105,10 @@ export const UtilityBar: React.FC = () => {
             <IconButton
               sx={{
                 borderRadius: 999,
-                marginRight: 4,
+                marginRight: {
+                  xs: 1,
+                  md: 4,
+                },
                 marginTop: 2,
                 color: "#fff",
                 ":hover": {
