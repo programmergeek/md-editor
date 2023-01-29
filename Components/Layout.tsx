@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import React from "react";
 import { SideNavbar } from "./Navigation";
 import { UtilityBar } from "./UtilityBar/UtilityBar";
@@ -18,7 +18,21 @@ export const Layout: React.FC<Props> = ({ ...props }) => {
           <SideNavbar />
         </Grid>
         <Grid item xs={12} sm={11.25} lg={11.5} xl={11.6}>
-          <Grid item>
+          <Grid
+            item
+            justifyContent="end"
+            xl={11.6}
+            lg={11.5}
+            sm={11.25}
+            xs={12}
+            sx={{
+              position: "fixed",
+              top: 0,
+              width: "100%",
+              zIndex: 100,
+              marginLeft: 0.5,
+            }}
+          >
             {
               //Inseart utility bar here.
             }
@@ -26,6 +40,7 @@ export const Layout: React.FC<Props> = ({ ...props }) => {
           </Grid>
           <Grid item xs>
             {/** page content goes here */}
+            <Box sx={{ width: "100%", height: "100px" }} />
             {props.children}
           </Grid>
           <Grid item xs={1} sm={0.001}>

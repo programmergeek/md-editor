@@ -22,6 +22,11 @@ export const SideNavbar: React.FC = () => {
         },
         justifyContent: "center",
         paddingTop: 2,
+        position: "fixed",
+        top: 0,
+        paddingLeft: 1,
+        paddingRight: 2,
+        zIndex: 110,
       }}
     >
       <Grid container spacing={7} direction={"column"}>
@@ -31,7 +36,7 @@ export const SideNavbar: React.FC = () => {
            * - It takes you to the home page on click
            * - it is slightly larger than the other nav elements
            */}
-          <BsMarkdown fontSize={"45"} />
+          <BsMarkdown fontSize={"40"} />
         </Grid>
         <Grid
           item
