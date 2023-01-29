@@ -62,7 +62,7 @@ export const UtilityBar: React.FC = () => {
                 marginTop: 1,
                 marginLeft: {
                   xs: 1,
-                  md: 4,
+                  sm: 4,
                 },
                 width: "100%",
               }}
@@ -107,7 +107,7 @@ export const UtilityBar: React.FC = () => {
                 borderRadius: 999,
                 marginRight: {
                   xs: 1,
-                  md: 4,
+                  sm: 4,
                 },
                 marginTop: 2,
                 color: "#fff",
