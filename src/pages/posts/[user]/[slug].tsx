@@ -78,6 +78,10 @@ const Post: React.FC = () => {
     updateOpenDialog(false);
   };
 
+  const onSave = () => {
+    addPost(title, { content: JSON.stringify(content) }, link ? link : "");
+  };
+
   return (
     <Layout>
       <Head>
@@ -229,11 +233,7 @@ const Post: React.FC = () => {
                     </IconButton>
                   </Tooltip>
                   <Tooltip title="Save Post">
-                    <IconButton
-                      onClick={() =>
-                        addPost(title, { content: JSON.stringify(content) }, "")
-                      }
-                    >
+                    <IconButton onClick={onSave}>
                       <AiOutlineSave />
                     </IconButton>
                   </Tooltip>
@@ -255,17 +255,7 @@ const Post: React.FC = () => {
                   value={content}
                 />
               )}
-              <Button
-                onClick={() =>
-                  addPost(
-                    title,
-                    { content: JSON.stringify(content) },
-                    link ? link : ""
-                  )
-                }
-              >
-                Save
-              </Button>
+              <Button onClick={onSave}>Save</Button>
             </Grid>
           </Grid>
         </Grid>
