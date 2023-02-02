@@ -19,7 +19,7 @@ export const addPost = async (
   const db = getFirestore(app);
   try {
     // add document to Posts collection
-    await addDoc(collection(db, "Posts"), {
+    return await addDoc(collection(db, "Posts"), {
       publish_date: serverTimestamp(),
       update_date: serverTimestamp(),
       title: title,

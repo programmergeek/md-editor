@@ -24,6 +24,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { IoCameraOutline } from "react-icons/io5";
 import { AiOutlineSave } from "react-icons/ai";
+import { useRouter } from "next/router";
 
 //
 // - This is where posts will be display
@@ -49,6 +50,7 @@ const Post: React.FC = () => {
   const [openDialog, updateOpenDialog] = useState(false);
   const [imageLink, updateImageLink] = useState<string>();
   const [link, updateLink] = useState<string>();
+  const router = useRouter();
 
   // memorise output to avoid making unneccessary requests when you are switching between preview and edit mode
   const renderedMarkdown = useMemo(
@@ -84,8 +86,22 @@ const Post: React.FC = () => {
   };
 
   // handles saving the post
-  const onSave = () => {
-    addPost(title, { content: JSON.stringify(content) }, link ? link : "");
+  const onSave = async () => {
+    await addPost(
+      title,
+      { content: JSON.stringify(content) },
+      link ? link : ""
+    ).then((res) => {
+      if (res) {
+        router.push({
+          pathname: `/posts/[user]/[slug]`,
+          query: {
+            user: "123", // TODO: get user id from global state
+            slug: "saved-post", // TODO: replace with slug
+          },
+        });
+      }
+    });
   };
 
   return (
