@@ -98,7 +98,7 @@ const Post: React.FC = () => {
                 value={title}
               />
             </Grid>
-            <Grid item>
+            <Grid item sx={{ display: previewMode ? "none" : "" }}>
               <Box
                 sx={{
                   width: "100%",
