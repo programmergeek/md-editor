@@ -63,21 +63,27 @@ const Post: React.FC = () => {
     [content]
   );
 
+  // handles updating the title
   const handleTitleChange = (event: any) => {
     updateTitle(event.currentTarget.value);
   };
+
+  // handles updating the content state
   const handleContentChange = (event: any) => {
     updateContent(event.currentTarget.value);
   };
 
+  // opens dialog box
   const handleOpenDialog = () => {
     updateOpenDialog(true);
   };
 
+  // closes dialog box
   const handleCloseDialog = () => {
     updateOpenDialog(false);
   };
 
+  // handles saving the post
   const onSave = () => {
     addPost(title, { content: JSON.stringify(content) }, link ? link : "");
   };
