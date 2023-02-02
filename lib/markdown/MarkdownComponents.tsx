@@ -58,49 +58,73 @@ export const MarkdownComponents: Partial<
   },
   h1: ({ node, ...props }: any) => {
     return (
-      <Typography variant="h1" sx={{ fontSize: 40, fontWeight: 600 }}>
+      <Typography
+        variant="h1"
+        sx={{ fontSize: 40, fontWeight: 600, marginBottom: 3 }}
+      >
         {props.children}
       </Typography>
     );
   },
   h2: ({ node, ...props }: any) => {
     return (
-      <Typography variant="h2" sx={{ fontSize: 35, fontWeight: 600 }}>
+      <Typography
+        variant="h2"
+        sx={{ fontSize: 35, fontWeight: 600, marginBottom: 2.7 }}
+      >
         {props.children}
       </Typography>
     );
   },
   h3: ({ node, ...props }: any) => {
     return (
-      <Typography variant="h3" sx={{ fontSize: 30, fontWeight: 600 }}>
+      <Typography
+        variant="h3"
+        sx={{ fontSize: 30, fontWeight: 600, marginBottom: 2.4 }}
+      >
         {props.children}
       </Typography>
     );
   },
   h4: ({ node, ...props }: any) => {
     return (
-      <Typography variant="h4" sx={{ fontSize: 25, fontWeight: 600 }}>
+      <Typography
+        variant="h4"
+        sx={{ fontSize: 25, fontWeight: 600, marginBottom: 2.1 }}
+      >
         {props.children}
       </Typography>
     );
   },
   h5: ({ node, ...props }: any) => {
     return (
-      <Typography variant="h5" sx={{ fontSize: 20, fontWeight: 600 }}>
+      <Typography
+        variant="h5"
+        sx={{ fontSize: 20, fontWeight: 600, marginBottom: 1.8 }}
+      >
         {props.children}
       </Typography>
     );
   },
   h6: ({ node, ...props }: any) => {
     return (
-      <Typography variant="h6" sx={{ fontSize: 15, fontWeight: 600 }}>
+      <Typography
+        variant="h6"
+        sx={{ fontSize: 15, fontWeight: 600, marginBottom: 1.5 }}
+      >
         {props.children}
       </Typography>
     );
   },
   p: ({ node, ...props }: any) => {
     return (
-      <Typography sx={{ fontSize: { xs: 12, lg: 16 }, wordWrap: "normal" }}>
+      <Typography
+        sx={{
+          fontSize: { xs: 12, lg: 16 },
+          wordWrap: "normal",
+          marginBottom: 1.5,
+        }}
+      >
         {" "}
         {props.children}{" "}
       </Typography>
@@ -111,7 +135,10 @@ export const MarkdownComponents: Partial<
   },
   table: ({ node, ...props }) => {
     return (
-      <TableContainer component={Paper}>
+      <TableContainer
+        component={Paper}
+        sx={{ marginBottom: 2.5, marginTop: 2.5 }}
+      >
         <Table>{props.children}</Table>
       </TableContainer>
     );
@@ -152,6 +179,7 @@ export const MarkdownComponents: Partial<
           paddingTop: 1,
           paddingBottom: 1,
           backgroundColor: colours.grey[100],
+          marginBottom: 2,
         }}
       >
         <Typography>{props.children}</Typography>
@@ -159,10 +187,10 @@ export const MarkdownComponents: Partial<
     );
   },
   ul: ({ ...props }) => {
-    return <List sx={{ padding: 0 }}>{props.children}</List>;
+    return <List sx={{ padding: 0, marginBottom: 1.5 }}>{props.children}</List>;
   },
   ol: ({ ...props }) => {
-    return <List sx={{ padding: 0 }}>{props.children}</List>;
+    return <List sx={{ padding: 0, marginBottom: 1.5 }}>{props.children}</List>;
   },
   li: ({ index, ordered, ...props }) => {
     return (
