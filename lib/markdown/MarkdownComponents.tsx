@@ -196,7 +196,7 @@ export const MarkdownComponents: Partial<
     return (
       <ListItem dense disableGutters sx={{ padding: 0 }}>
         <ListItemText>
-          {ordered ? index + 1 + "." : ""} {props.children}
+          {ordered ? index + 1 + "." : "◼"} {props.children}
         </ListItemText>
       </ListItem>
     );
