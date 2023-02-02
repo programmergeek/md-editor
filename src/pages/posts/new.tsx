@@ -95,6 +95,7 @@ const Post: React.FC = () => {
                 multiline
                 fullWidth
                 onChange={handleTitleChange}
+                value={title}
               />
             </Grid>
             <Grid item>
