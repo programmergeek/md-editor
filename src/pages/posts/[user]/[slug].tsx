@@ -25,6 +25,8 @@ import remarkGfm from "remark-gfm";
 import { IoCameraOutline } from "react-icons/io5";
 import { AiOutlineSave } from "react-icons/ai";
 import { useRouter } from "next/router";
+import { GetServerSideProps } from "next";
+import { getPost } from "lib/firebase/firestore/getPost";
 
 //
 // - This is where posts will be display
@@ -287,3 +289,12 @@ const Post: React.FC = () => {
 };
 
 export default Post;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { user, slug } = context.query;
+  console.log(`User: User/${user} \t slug: ${slug}\n`);
+  console.log(await getPost(user as string, slug as string));
+  return {
+    props: {},
+  };
+};
