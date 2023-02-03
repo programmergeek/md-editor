@@ -19,7 +19,7 @@ import { Layout } from "Components";
 import { addPost } from "lib/firebase/firestore/addPost";
 import { MarkdownComponents } from "lib/markdown/MarkdownComponents";
 import Head from "next/head";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { IoCameraOutline } from "react-icons/io5";
@@ -50,6 +50,7 @@ const Post: React.FC = () => {
   const [openDialog, updateOpenDialog] = useState(false);
   const [imageLink, updateImageLink] = useState<string>();
   const [link, updateLink] = useState<string>();
+  const [canSave, updateCanSave] = useState(false);
   const router = useRouter();
 
   // memorise output to avoid making unneccessary requests when you are switching between preview and edit mode
@@ -64,6 +65,16 @@ const Post: React.FC = () => {
     ),
     [content]
   );
+
+  // Disable save buttons when the title and body fields are empty
+  useEffect(() => {
+    if (!content || !title) {
+      updateCanSave(true);
+      console.log(canSave);
+    } else {
+      updateCanSave(false);
+    }
+  }, [content, title]);
 
   // handles updating the title
   const handleTitleChange = (event: any) => {
@@ -255,7 +266,7 @@ const Post: React.FC = () => {
                     </IconButton>
                   </Tooltip>
                   <Tooltip title="Save Post">
-                    <IconButton onClick={onSave}>
+                    <IconButton disabled={canSave} onClick={onSave}>
                       <AiOutlineSave />
                     </IconButton>
                   </Tooltip>
@@ -277,7 +288,9 @@ const Post: React.FC = () => {
                   value={content}
                 />
               )}
-              <Button onClick={onSave}>Save</Button>
+              <Button disabled={canSave} onClick={onSave}>
+                Save
+              </Button>
             </Grid>
           </Grid>
         </Grid>
