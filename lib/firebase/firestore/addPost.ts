@@ -6,6 +6,9 @@ import {
   getFirestore,
   serverTimestamp,
   doc,
+  query,
+  where,
+  getDocs,
 } from "firebase/firestore";
 
 interface Posts {
@@ -24,19 +27,51 @@ export const addPost = async ({
 }: Posts) => {
   // connect to firestore
   const db = getFirestore(app);
-  try {
-    // add document to Posts collection
-    return await addDoc(collection(db, "Posts"), {
-      publish_date: serverTimestamp(),
-      update_date: serverTimestamp(),
-      title: title,
-      body: content,
-      post_id: uuidv4(),
-      hero_image: heroImage,
-      author: doc(db, `Users/${user_id}`),
-      slug: title.replaceAll(" ", "-").toLowerCase(),
-    });
-  } catch (e) {
-    console.log("There was an issue: ", e);
+  if (!(await titleIsUnique(`Users/${user_id}`, title))) {
+    try {
+      // add document to Posts collection
+      return await addDoc(collection(db, "Posts"), {
+        publish_date: serverTimestamp(),
+        update_date: serverTimestamp(),
+        title: title,
+        body: content,
+        post_id: uuidv4(),
+        hero_image: heroImage,
+        author: doc(db, `Users/${user_id}`),
+        slug: title.replaceAll(" ", "-").toLowerCase(),
+      });
+    } catch (e) {
+      console.log("There was an issue: ", e);
+    }
+  } else {
+    console.log("Title is taken");
   }
+};
+
+/** Checks if the user has made a post with the same title before.
+ * `false` means the title is available where as `true` means the title is taken. */
+const titleIsUnique = (user_id: string, title: string) => {
+  //query firestore if there is a post with a matching user_id and title.
+  // if there is one then return false otherise return true.
+  const db = getFirestore(app);
+  const postsRef = collection(db, "Posts");
+  let isTaken = false;
+
+  // query for a post with a matching author and title
+  const post = query(
+    postsRef,
+    where("author", "==", doc(db, user_id)),
+    where("title", "==", title)
+  );
+
+  // get all the posts that match the query
+  getDocs(post).then((doc) => {
+    // if there is one or more post retrieved then the title is taken
+    if (doc.size > 0) {
+      isTaken = true;
+      console.log(isTaken);
+    }
+  });
+
+  return isTaken;
 };
