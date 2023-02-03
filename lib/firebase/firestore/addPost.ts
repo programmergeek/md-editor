@@ -8,13 +8,20 @@ import {
   doc,
 } from "firebase/firestore";
 
+interface Posts {
+  title: string;
+  content: string;
+  user_id?: string;
+  heroImage: string;
+}
+
 /** Adds a new post to firestore */
-export const addPost = async (
-  title: string, // title of the post
-  body: object, // a json representation of the markdown content
-  hero_image: string, // a link to the hero image
-  author = "guest" // a reference to the user in the user collection
-) => {
+export const addPost = async ({
+  title,
+  user_id = "guest",
+  content,
+  heroImage,
+}: Posts) => {
   // connect to firestore
   const db = getFirestore(app);
   try {
@@ -23,11 +30,11 @@ export const addPost = async (
       publish_date: serverTimestamp(),
       update_date: serverTimestamp(),
       title: title,
-      body: body,
+      body: content,
       post_id: uuidv4(),
-      hero_image: hero_image,
-      author: doc(db, `Users/${author}`),
-      slug: title.replace(" ", "-").toLowerCase(),
+      hero_image: heroImage,
+      author: doc(db, `Users/${user_id}`),
+      slug: title.replaceAll(" ", "-").toLowerCase(),
     });
   } catch (e) {
     console.log("There was an issue: ", e);

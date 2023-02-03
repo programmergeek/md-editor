@@ -98,7 +98,11 @@ const Post: React.FC = () => {
 
   // handles saving the post
   const onSave = async () => {
-    await addPost(title, { content: JSON.stringify(content) }, link ? link : "")
+    await addPost({
+      title: title,
+      content: JSON.stringify(content),
+      heroImage: link ? link : "",
+    })
       .then((res) => {
         // if the post has been successfully saved then redirect the user to the posts page
         if (res?.id) {

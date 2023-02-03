@@ -87,11 +87,11 @@ const Post: React.FC = () => {
 
   // handles saving the post
   const onSave = async () => {
-    await addPost(
-      title,
-      { content: JSON.stringify(content) },
-      link ? link : ""
-    ).then((res) => {
+    await addPost({
+      title: title,
+      content: JSON.stringify(content),
+      heroImage: link ? link : "",
+    }).then((res) => {
       if (res) {
         router.push({
           pathname: `/posts/[user]/[slug]`,
