@@ -25,8 +25,9 @@ import remarkGfm from "remark-gfm";
 import { IoCameraOutline } from "react-icons/io5";
 import { AiOutlineSave } from "react-icons/ai";
 import { useRouter } from "next/router";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { getPost } from "lib/firebase/firestore/getPost";
+import Error from "next/error";
 
 //
 // - This is where posts will be display
@@ -45,13 +46,16 @@ import { getPost } from "lib/firebase/firestore/getPost";
 //      - Content will be rendered using react components ✅
 //
 
-const Post: React.FC = () => {
-  const [title, updateTitle] = useState("");
-  const [content, updateContent] = useState("");
+const Post: React.FC = ({
+  data,
+  error,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const [title, updateTitle] = useState(data.title as string);
+  const [content, updateContent] = useState(data.body as string);
   const [previewMode, togglePreviewMode] = useState(false);
   const [openDialog, updateOpenDialog] = useState(false);
-  const [imageLink, updateImageLink] = useState<string>();
-  const [link, updateLink] = useState<string>();
+  const [imageLink, updateImageLink] = useState<string>("");
+  const [link, updateLink] = useState<string>(data.hero_image as string);
   const router = useRouter();
 
   // memorise output to avoid making unneccessary requests when you are switching between preview and edit mode
@@ -105,6 +109,10 @@ const Post: React.FC = () => {
       }
     });
   };
+
+  if (error) {
+    return <Error title="Page Not Found" statusCode={404} />;
+  }
 
   return (
     <Layout>
@@ -215,7 +223,7 @@ const Post: React.FC = () => {
                       placeItems: "center",
                     }}
                   >
-                    <img src={imageLink} style={{ width: "100%" }} />
+                    <img src={link} style={{ width: "100%" }} />
                   </Box>
                 )}
               </Box>
@@ -291,10 +299,25 @@ const Post: React.FC = () => {
 export default Post;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  // get the user id and slug from the request
   const { user, slug } = context.query;
-  console.log(`User: User/${user} \t slug: ${slug}\n`);
-  console.log(await getPost(user as string, slug as string));
+
+  // get post data
+  const data = await getPost(user as string, slug as string);
+
+  // return an error if no data is found
+  if (data === -1) {
+    return {
+      props: {
+        error: true,
+      },
+    };
+  }
+
+  // return post data
   return {
-    props: {},
+    props: {
+      data,
+    },
   };
 };
