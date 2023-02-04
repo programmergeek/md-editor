@@ -100,7 +100,7 @@ const Post: React.FC = () => {
   const onSave = async () => {
     await addPost({
       title: title,
-      content: JSON.stringify(content),
+      content: content,
       heroImage: link ? link : "",
     })
       .then((res) => {
