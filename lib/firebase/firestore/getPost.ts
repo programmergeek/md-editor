@@ -29,41 +29,48 @@ export const getPost = async (user_id: string, slug: string) => {
   );
 
   // get the post data
-  const postDoc = await getDocs(q).then((doc) => doc.docs[0].data());
+  const postDoc = await getDocs(q).then((doc) => {
+    if (doc.size === 0) {
+      // incase no data was found
+      return false;
+    } else {
+      return doc.docs[0].data();
+    }
+  });
 
-  // if no data is found return -1
-  if (!postDoc.title) {
-    return -1;
+  // Format data for the for the front-end
+  if (postDoc !== false) {
+    const post = {
+      title: postDoc.title as string,
+      slug: postDoc.slug as string,
+      hero_image: postDoc.hero_image as string,
+      body: postDoc.body as string,
+      publish_date: new Timestamp(
+        postDoc.publish_date.seconds,
+        postDoc.publish_date.nanoseconds
+      )
+        .toDate()
+        .toLocaleDateString("en-UK", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        }),
+      update_date: new Timestamp(
+        postDoc.publish_date.seconds,
+        postDoc.publish_date.nanoseconds
+      )
+        .toDate()
+        .toLocaleDateString("en-UK", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        }),
+    };
+
+    //return the post data
+    return post;
   }
 
-  //TODO: Format data for the for the front-end
-  const post = {
-    title: postDoc.title as string,
-    slug: postDoc.slug as string,
-    hero_image: postDoc.hero_image as string,
-    body: postDoc.body.replaceAll("\\n", "\n") as string,
-    publish_date: new Timestamp(
-      postDoc.publish_date.seconds,
-      postDoc.publish_date.nanoseconds
-    )
-      .toDate()
-      .toLocaleDateString("en-UK", {
-        month: "long",
-        day: "numeric",
-        year: "numeric",
-      }),
-    update_date: new Timestamp(
-      postDoc.publish_date.seconds,
-      postDoc.publish_date.nanoseconds
-    )
-      .toDate()
-      .toLocaleDateString("en-UK", {
-        month: "long",
-        day: "numeric",
-        year: "numeric",
-      }),
-  };
-
-  //return the post data
-  return post;
+  // if no data is found return -1
+  return -1;
 };

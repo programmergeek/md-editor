@@ -50,11 +50,17 @@ const Post: React.FC = ({
   data,
   error,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  if (error === true) {
+    return <Error title="Page Not Found" statusCode={404} />;
+  }
+
   const [title, updateTitle] = useState(data.title as string);
   const [content, updateContent] = useState(data.body as string);
   const [previewMode, togglePreviewMode] = useState(false);
   const [openDialog, updateOpenDialog] = useState(false);
-  const [imageLink, updateImageLink] = useState<string>("");
+  const [imageLink, updateImageLink] = useState<string>(
+    data.hero_image as string
+  );
   const [link, updateLink] = useState<string>(data.hero_image as string);
   const router = useRouter();
 
@@ -109,10 +115,6 @@ const Post: React.FC = ({
       }
     });
   };
-
-  if (error) {
-    return <Error title="Page Not Found" statusCode={404} />;
-  }
 
   return (
     <Layout>
