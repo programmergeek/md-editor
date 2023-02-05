@@ -109,8 +109,8 @@ const Post: React.FC = () => {
           router.push({
             pathname: `/posts/[user]/[slug]`,
             query: {
-              user: "123", // TODO: get user id from global state
-              slug: "saved-post", // TODO: replace with slug
+              user: "guest", // TODO: get user id from global state
+              slug: title.replaceAll(" ", "-").toLowerCase(), // TODO: replace with slug
             },
           });
         } else {
