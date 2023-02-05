@@ -1,5 +1,4 @@
 import { app } from "../Initialize";
-import { v4 as uuidv4 } from "uuid";
 import {
   collection,
   addDoc,
@@ -35,7 +34,6 @@ export const addPost = async ({
         update_date: serverTimestamp(),
         title: title,
         body: content,
-        post_id: uuidv4(),
         hero_image: heroImage,
         author: doc(db, `Users/${user_id}`),
         slug: title.replaceAll(" ", "-").toLowerCase(),
