@@ -28,6 +28,7 @@ import { useRouter } from "next/router";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { getPost } from "lib/firebase/firestore/getPost";
 import Error from "next/error";
+import { updatePost } from "lib/firebase/firestore/updatePost";
 
 //
 // - This is where posts will be display
@@ -99,21 +100,8 @@ const Post: React.FC = ({
 
   // handles saving the post
   const onSave = async () => {
-    await addPost({
-      title: title,
-      content: JSON.stringify(content),
-      heroImage: link ? link : "",
-    }).then((res) => {
-      if (res) {
-        router.push({
-          pathname: `/posts/[user]/[slug]`,
-          query: {
-            user: "123", // TODO: get user id from global state
-            slug: "saved-post", // TODO: replace with slug
-          },
-        });
-      }
-    });
+    // TODO: pass
+    await updatePost(title, content, link, router.query.user as string);
   };
 
   return (
