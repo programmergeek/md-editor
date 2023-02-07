@@ -29,6 +29,7 @@ import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { getPost } from "lib/firebase/firestore/getPost";
 import Error from "next/error";
 import { updatePost } from "lib/firebase/firestore/updatePost";
+import { request } from "http";
 
 //
 // - This is where posts will be display
@@ -100,8 +101,25 @@ const Post: React.FC = ({
 
   // handles saving the post
   const onSave = async () => {
-    // TODO: pass
-    await updatePost(title, content, link, router.query.user as string);
+    // update post
+    await updatePost(
+      data.title,
+      title,
+      content,
+      link,
+      router.query.user as string
+    ).then(() => {
+      // replace page with new slug if the title is changed
+      if (data.title !== title) {
+        router.replace({
+          pathname: `/posts/[user]/[slug]`,
+          query: {
+            user: router.query.user as string,
+            slug: title.replaceAll(" ", "-").toLowerCase(),
+          },
+        });
+      }
+    });
   };
 
   return (

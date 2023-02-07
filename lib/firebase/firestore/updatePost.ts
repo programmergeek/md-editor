@@ -21,6 +21,7 @@ import { app } from "../Initialize";
  * @param author
  */
 export const updatePost = async (
+  oldTitle: string,
   title: string,
   body: string,
   hero_image: string,
@@ -34,7 +35,7 @@ export const updatePost = async (
   const q = query(
     postsRef,
     where("author", "==", doc(db, `Users/${author}`)),
-    where("title", "==", title)
+    where("title", "==", oldTitle)
   );
 
   // get the post reference
