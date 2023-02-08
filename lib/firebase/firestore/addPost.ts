@@ -26,12 +26,7 @@ export const addPost = async ({
 }: Posts) => {
   // connect to firestore
   const db = getFirestore(app);
-  if (
-    !(await titleIsUnique(
-      `Users/${user_id}`,
-      title.replaceAll(" ", "-").toLowerCase()
-    ))
-  ) {
+  if (!(await titleIsUnique(`Users/${user_id}`, title.replaceAll(" ", "-")))) {
     try {
       // add document to Posts collection
       return await addDoc(collection(db, "Posts"), {
@@ -41,7 +36,7 @@ export const addPost = async ({
         body: content,
         hero_image: heroImage,
         author: doc(db, `Users/${user_id}`),
-        slug: title.replaceAll(" ", "-").toLowerCase(),
+        slug: title.replaceAll(" ", "-"),
       });
     } catch (e) {
       console.log("There was an issue: ", e);

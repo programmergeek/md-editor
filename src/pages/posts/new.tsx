@@ -118,7 +118,7 @@ const Post: React.FC = () => {
             pathname: `/posts/[user]/[slug]`,
             query: {
               user: "guest", // TODO: get user id from global state
-              slug: title.replaceAll(" ", "-").toLowerCase(), // TODO: replace with slug
+              slug: title.replaceAll(" ", "-"), // TODO: replace with slug
             },
           });
         } else {

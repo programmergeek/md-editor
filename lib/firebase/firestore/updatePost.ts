@@ -35,8 +35,12 @@ export const updatePost = async (
   const q = query(
     postsRef,
     where("author", "==", doc(db, `Users/${author}`)),
-    where("title", "==", oldTitle)
+    where("slug", "==", oldTitle.replaceAll(" ", "-").toLowerCase())
   );
+
+  //TODO:
+  // 1. Make sure that when the title is changed it does not produce a slug that already exists
+  // 2. send an error message if the slug is already being used by another post the user has made
 
   // get the post reference
   let postRef: DocumentReference<DocumentData>;
@@ -51,7 +55,7 @@ export const updatePost = async (
         body: body,
         hero_image: hero_image,
         update_date: serverTimestamp(),
-        slug: title.replaceAll(" ", "-").toLowerCase(),
+        slug: title.replaceAll(" ", "-"),
       });
     });
 };

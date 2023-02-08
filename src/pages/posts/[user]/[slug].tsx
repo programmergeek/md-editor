@@ -123,7 +123,7 @@ const Post: React.FC = ({
           pathname: `/posts/[user]/[slug]`,
           query: {
             user: router.query.user as string,
-            slug: title.replaceAll(" ", "-").toLowerCase(),
+            slug: title.replaceAll(" ", "-"),
           },
         });
       }
