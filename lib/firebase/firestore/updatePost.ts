@@ -35,12 +35,8 @@ export const updatePost = async (
   const q = query(
     postsRef,
     where("author", "==", doc(db, `Users/${author}`)),
-    where("slug", "==", oldTitle.replaceAll(" ", "-").toLowerCase())
+    where("slug", "==", oldTitle.replaceAll(" ", "-"))
   );
-
-  //TODO:
-  // 1. Make sure that when the title is changed it does not produce a slug that already exists
-  // 2. send an error message if the slug is already being used by another post the user has made
 
   // get the post reference
   let postRef: DocumentReference<DocumentData>;
