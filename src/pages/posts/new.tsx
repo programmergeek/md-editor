@@ -57,6 +57,7 @@ const Post: React.FC = () => {
   const [canSave, updateCanSave] = useState(false);
   const [isLoading, updateIsLoading] = useState(false);
   const [isSaved, updateIsSaved] = useState(false);
+  const [titleError, updateTitleError] = useState(false);
   const router = useRouter();
 
   // memorise output to avoid making unneccessary requests when you are switching between preview and edit mode
@@ -123,6 +124,8 @@ const Post: React.FC = () => {
             },
           });
         } else {
+          updateTitleError(true);
+          updateIsLoading(false);
         }
       })
       .catch(console.log); // display any errors in the console
@@ -152,6 +155,16 @@ const Post: React.FC = () => {
         open={isSaved}
         message="Post Saved"
         ContentProps={{ sx: { justifyContent: "center" } }}
+      />
+      <Snackbar
+        anchorOrigin={{
+          horizontal: "center",
+          vertical: "top",
+        }}
+        open={titleError}
+        message="Error: The title is already being used in another post."
+        ContentProps={{ sx: { justifyContent: "center" } }}
+        onClose={() => updateTitleError(false)}
       />
       <Layout>
         <Head>
