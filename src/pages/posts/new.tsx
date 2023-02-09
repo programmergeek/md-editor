@@ -28,6 +28,7 @@ import remarkGfm from "remark-gfm";
 import { IoCameraOutline } from "react-icons/io5";
 import { AiOutlineSave } from "react-icons/ai";
 import { useRouter } from "next/router";
+import { MdOutlineDelete } from "react-icons/md";
 
 //
 // - This is where posts will be display
@@ -125,6 +126,14 @@ const Post: React.FC = () => {
         }
       })
       .catch(console.log); // display any errors in the console
+  };
+
+  const onDelete = () => {
+    // Deletes whatever content the user has entered
+    updateContent("");
+    updateImageLink("");
+    updateLink("");
+    updateTitle("");
   };
 
   return (
@@ -300,6 +309,18 @@ const Post: React.FC = () => {
                     <Tooltip title="Save Post">
                       <IconButton disabled={canSave} onClick={onSave}>
                         <AiOutlineSave />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Discard">
+                      <IconButton
+                        disabled={
+                          content.length === 0 && title.length === 0
+                            ? true
+                            : false
+                        }
+                        onClick={onDelete}
+                      >
+                        <MdOutlineDelete />
                       </IconButton>
                     </Tooltip>
                   </Grid>
