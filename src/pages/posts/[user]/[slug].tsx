@@ -165,7 +165,7 @@ const Post: React.FC = ({
       />
       <Layout>
         <Head>
-          <title>{title}</title>
+          <title>{title ? title : "Untitled"}</title>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Head>
         <Container>
