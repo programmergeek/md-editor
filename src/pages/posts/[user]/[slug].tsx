@@ -27,12 +27,13 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { IoCameraOutline } from "react-icons/io5";
 import { AiOutlineSave } from "react-icons/ai";
+import { MdOutlineDelete } from "react-icons/md";
 import { useRouter } from "next/router";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { getPost } from "lib/firebase/firestore/getPost";
 import Error from "next/error";
 import { updatePost } from "lib/firebase/firestore/updatePost";
-import { request } from "http";
+import { deletePost } from "lib/firebase/firestore/deletePost";
 
 //
 // - This is where posts will be display
@@ -127,6 +128,18 @@ const Post: React.FC = ({
           },
         });
       }
+    });
+  };
+
+  // handles deleting a post
+  const onDelete = async () => {
+    updateIsLoading(true);
+    await deletePost(
+      router.query.user as string,
+      data.title.replaceAll(" ", "-")
+    ).then(() => {
+      // redirect user to home page after deleting post
+      router.push("/");
     });
   };
 
@@ -306,6 +319,11 @@ const Post: React.FC = ({
                     <Tooltip title="Save Post">
                       <IconButton onClick={onSave}>
                         <AiOutlineSave />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Delete Post">
+                      <IconButton onClick={onDelete}>
+                        <MdOutlineDelete />
                       </IconButton>
                     </Tooltip>
                   </Grid>
