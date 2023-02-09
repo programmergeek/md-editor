@@ -48,7 +48,7 @@ export const addPost = async ({
 
 /** Checks if the user has made a post with the same title before.
  * `false` means the title is available where as `true` means the title is taken. */
-const titleIsUnique = (user_id: string, title: string) => {
+const titleIsUnique = async (user_id: string, title: string) => {
   //query firestore if there is a post with a matching user_id and title.
   // if there is one then return false otherise return true.
   const db = getFirestore(app);
@@ -63,7 +63,7 @@ const titleIsUnique = (user_id: string, title: string) => {
   );
 
   // get all the posts that match the query
-  getDocs(post).then((doc) => {
+  await getDocs(post).then((doc) => {
     // if there is one or more post retrieved then the title is taken
     if (doc.size > 0) {
       isTaken = true;
