@@ -3,6 +3,8 @@ import {
   Box,
   Grid,
   IconButton,
+  InputAdornment,
+  InputBase,
   ListItemIcon,
   Menu,
   MenuItem,
@@ -59,7 +61,7 @@ export const UtilityBar: React.FC = () => {
                 display: "flex",
                 alignItems: "flex-end",
                 gap: 2,
-                marginTop: 1,
+                marginTop: 2.5,
                 marginLeft: {
                   xs: 1,
                   sm: 4,
@@ -67,14 +69,22 @@ export const UtilityBar: React.FC = () => {
                 width: "100%",
               }}
             >
-              <Box sx={{ width: 20 }}>
-                <FiSearch />
-              </Box>
-              <TextField
+              <InputBase
                 id="standard-basic"
-                label="search"
-                variant="standard"
+                placeholder="Search"
                 fullWidth
+                startAdornment={
+                  <InputAdornment position="start">
+                    <FiSearch />
+                  </InputAdornment>
+                }
+                sx={{
+                  backgroundColor: "#eaeaea",
+                  borderRadius: 2,
+                  paddingTop: 0.5,
+                  paddingBottom: 0.5,
+                  paddingLeft: 1,
+                }}
               />
             </Box>
           </Grid>
