@@ -24,8 +24,14 @@ export const SideNavbar: React.FC = () => {
         paddingTop: 2,
         position: "fixed",
         top: 0,
-        paddingLeft: 1,
-        paddingRight: 2,
+        paddingLeft: {
+          xs: 1,
+          md: 2,
+        },
+        paddingRight: {
+          xs: 1,
+          md: 2,
+        },
         zIndex: 110,
       }}
     >
