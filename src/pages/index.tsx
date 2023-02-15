@@ -101,16 +101,18 @@ const Post: React.FC = () => {
                   }}
                 >
                   <Tooltip title="Discard">
-                    <IconButton
-                      disabled={
-                        content.length === 0 && title.length === 0
-                          ? true
-                          : false
-                      }
-                      onClick={onDelete}
-                    >
-                      <MdOutlineDelete />
-                    </IconButton>
+                    <span>
+                      <IconButton
+                        disabled={
+                          content.length === 0 && title.length === 0
+                            ? true
+                            : false
+                        }
+                        onClick={onDelete}
+                      >
+                        <MdOutlineDelete />
+                      </IconButton>
+                    </span>
                   </Tooltip>
                 </Grid>
               </Grid>
