@@ -172,18 +172,19 @@ export const MarkdownComponents: Partial<
   },
   blockquote: ({ ...props }) => {
     return (
-      <Box
+      <Typography
         sx={{
           borderLeft: "5px solid black",
           paddingLeft: 2,
           paddingTop: 1,
-          paddingBottom: 1,
+          paddingRight: 0.2,
+          paddingBottom: 0.2,
           backgroundColor: colours.grey[100],
           marginBottom: 2,
         }}
       >
-        <Typography>{props.children}</Typography>
-      </Box>
+        {props.children}
+      </Typography>
     );
   },
   ul: ({ ...props }) => {
