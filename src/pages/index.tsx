@@ -1,24 +1,31 @@
 import {
+  Backdrop,
   Box,
+  Button,
   Container,
+  Fade,
   FormControlLabel,
   Grid,
   IconButton,
   InputBase,
+  Modal,
   Switch,
   Tooltip,
+  Typography,
 } from "@mui/material";
 import { MarkdownComponents } from "lib/markdown/MarkdownComponents";
 import Head from "next/head";
 import React, { useMemo, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { MdOutlineDelete } from "react-icons/md";
+import { MdOutlineDelete, MdHelpOutline } from "react-icons/md";
+import { help } from "./../../public/static/help";
 
 const Post: React.FC = () => {
   const [title, updateTitle] = useState("");
   const [content, updateContent] = useState("");
   const [previewMode, togglePreviewMode] = useState(false);
+  const [isOpen, updateIsOpen] = useState(true);
 
   // memorise output to avoid making unneccessary requests when you are switching between preview and edit mode
   const renderedMarkdown = useMemo(
@@ -33,6 +40,18 @@ const Post: React.FC = () => {
     [content]
   );
 
+  const renderHelpMarkdown = useMemo(
+    () => (
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        components={MarkdownComponents}
+      >
+        {help}
+      </ReactMarkdown>
+    ),
+    []
+  );
+
   // handles updating the title
   const handleTitleChange = (event: any) => {
     updateTitle(event.currentTarget.value);
@@ -43,6 +62,16 @@ const Post: React.FC = () => {
     updateContent(event.currentTarget.value);
   };
 
+  // opens help modal
+  const openHelp = () => {
+    updateIsOpen(true);
+  };
+
+  // closes help modal
+  const closeHelp = () => {
+    updateIsOpen(false);
+  };
+
   const onDelete = () => {
     // Deletes whatever content the user has entered
     updateContent("");
@@ -51,6 +80,66 @@ const Post: React.FC = () => {
 
   return (
     <>
+      <Modal open={isOpen} onClose={closeHelp} closeAfterTransition>
+        <Fade in={isOpen}>
+          <Box
+            sx={{
+              display: "grid",
+              height: "100vh",
+            }}
+          >
+            <Box
+              sx={{
+                backgroundColor: "#fff",
+                paddingLeft: 3,
+                paddingRight: 2,
+                paddingBottom: 2,
+                paddingTop: 2,
+                borderRadius: 1,
+                placeSelf: "center",
+                maxHeight: 500,
+                overflow: "auto",
+                width: {
+                  xs: "80vw",
+                  sm: "70vw",
+                  md: "60vw",
+                  lg: "50vw",
+                  xl: "40vw",
+                },
+              }}
+            >
+              <Grid container spacing={2} direction={"column"}>
+                <Grid item>
+                  <Typography sx={{ fontSize: 40, fontWeight: 600 }}>
+                    Markdown Editor Demo
+                  </Typography>
+                </Grid>
+                <Grid item xs={11}>
+                  {renderHelpMarkdown}
+                </Grid>
+                <Grid
+                  item
+                  display="flex"
+                  justifyContent={"end"}
+                  sx={{ marginTop: 2 }}
+                >
+                  <Button
+                    onClick={closeHelp}
+                    fullWidth
+                    sx={{
+                      fontWeight: 400,
+                      textTransform: "capitalize",
+                      fontSize: 16,
+                    }}
+                  >
+                    Done
+                  </Button>
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
+        </Fade>
+      </Modal>
       <Head>
         <title>Markdown Editor</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -100,6 +189,11 @@ const Post: React.FC = () => {
                     gap: 2,
                   }}
                 >
+                  <Tooltip title="Help">
+                    <IconButton onClick={openHelp}>
+                      <MdHelpOutline />
+                    </IconButton>
+                  </Tooltip>
                   <Tooltip title="Discard">
                     <span>
                       <IconButton
