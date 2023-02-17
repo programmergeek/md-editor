@@ -60,7 +60,7 @@ export const MarkdownComponents: Partial<
     return (
       <Typography
         variant="h1"
-        sx={{ fontSize: 40, fontWeight: 600, marginBottom: 3 }}
+        sx={{ fontSize: 32, fontWeight: 600, marginBottom: 3 }}
       >
         {props.children}
       </Typography>
@@ -70,7 +70,7 @@ export const MarkdownComponents: Partial<
     return (
       <Typography
         variant="h2"
-        sx={{ fontSize: 35, fontWeight: 600, marginBottom: 2.7 }}
+        sx={{ fontSize: 27, fontWeight: 600, marginBottom: 2.7 }}
       >
         {props.children}
       </Typography>
@@ -80,7 +80,7 @@ export const MarkdownComponents: Partial<
     return (
       <Typography
         variant="h3"
-        sx={{ fontSize: 30, fontWeight: 600, marginBottom: 2.4 }}
+        sx={{ fontSize: 23, fontWeight: 600, marginBottom: 2.4 }}
       >
         {props.children}
       </Typography>
@@ -90,7 +90,7 @@ export const MarkdownComponents: Partial<
     return (
       <Typography
         variant="h4"
-        sx={{ fontSize: 25, fontWeight: 600, marginBottom: 2.1 }}
+        sx={{ fontSize: 20, fontWeight: 600, marginBottom: 2.1 }}
       >
         {props.children}
       </Typography>
@@ -100,7 +100,7 @@ export const MarkdownComponents: Partial<
     return (
       <Typography
         variant="h5"
-        sx={{ fontSize: 20, fontWeight: 600, marginBottom: 1.8 }}
+        sx={{ fontSize: 16, fontWeight: 600, marginBottom: 1.8 }}
       >
         {props.children}
       </Typography>
@@ -110,7 +110,7 @@ export const MarkdownComponents: Partial<
     return (
       <Typography
         variant="h6"
-        sx={{ fontSize: 15, fontWeight: 600, marginBottom: 1.5 }}
+        sx={{ fontSize: 12, fontWeight: 600, marginBottom: 1.5 }}
       >
         {props.children}
       </Typography>
