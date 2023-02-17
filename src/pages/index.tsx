@@ -94,14 +94,13 @@ const Post: React.FC = () => {
                 padding: 2,
                 borderRadius: 1,
                 placeSelf: "center",
-                maxHeight: 500,
-                overflow: "auto",
+                maxHeight: "80vh",
                 width: {
                   xs: "80vw",
                   sm: "70vw",
                   md: "60vw",
-                  lg: "50vw",
-                  xl: "40vw",
+                  lg: "40vw",
+                  xl: "30vw",
                 },
               }}
             >
@@ -112,7 +111,18 @@ const Post: React.FC = () => {
                   </Typography>
                 </Grid>
                 <Grid item xs={11}>
-                  {renderHelpMarkdown}
+                  <Box
+                    sx={{
+                      maxHeight: {
+                        xs: "45vh",
+                        md: "55vh",
+                      },
+                      width: "100%",
+                      overflow: "auto",
+                    }}
+                  >
+                    {renderHelpMarkdown}
+                  </Box>
                 </Grid>
                 <Grid
                   item
