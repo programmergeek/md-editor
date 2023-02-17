@@ -91,10 +91,7 @@ const Post: React.FC = () => {
             <Box
               sx={{
                 backgroundColor: "#fff",
-                paddingLeft: 3,
-                paddingRight: 2,
-                paddingBottom: 2,
-                paddingTop: 2,
+                padding: 2,
                 borderRadius: 1,
                 placeSelf: "center",
                 maxHeight: 500,
